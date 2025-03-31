@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calcular Sucesiones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="tabs-container">
+        <div class="tabs-layout">
+            <select class="tabs-select">
+                <option value="tab1">calculadora</option>
+                <option value="tab2">Calculadora de Ahorros</option>
+                <option value="tab3">Interés Compuesto</option>
+                <option value="tab4">Interés Simple</option>
+                <option value="tab5">Préstamo Hipotecario</option>
+                <option value="tab6">Otro</option>
+            </select>
+            <ul class="tabs">
+                <li>
+                    <a id="tab1" title="" href="#tab1">Calculadora</a>
+                </li>
+                <li>
+                    <a id="tab2" title="" href="#tab2">Calculadora de Ahorros</a>
+                </li>
+                <li>
+                    <a id="tab3" title="" href="#tab3">Interés Simple</a>
+                </li>
+                <li>
+                    <a id="tab4" title="" href="#tab4">Interés Compuesto</a>
+                </li>
+                <!-- <li>
+                    <a id="tab5" title="" href="#tab5">Préstamo Hipotecario</a>
+                </li>
+                <li>
+                    <a id="tab6" title="" href="#tab6">Otro</a>
+                </li> -->
+            </ul>
+            <div class="tab-content-wrapper">
+                <section id="tab1-content" class="tab-content">
+                    <div class="contenedor">
+                        <div class="calculadora-cientifica">
+                            <input type="text" id="pantalla" disabled>
+                            <div class="botones">
+                                <button onclick="agregar('(')">(</button>
+                                <button onclick="agregar(')')">)</button>
+                                <button onclick="agregar('^')">xʸ</button>
+                                <button onclick="limpiar()">C</button>
+                                <button onclick="borrar()">⌫</button>
+                                <button onclick="agregar('/')">÷</button>
+                                <button onclick="agregar('Math.PI')">π</button>
+                                <button onclick="agregar(Math.E)">e</button>
+                                <button onclick="agregar('7')">7</button>
+                                <button onclick="agregar('8')">8</button>
+                                <button onclick="agregar('9')">9</button>
+                                <button onclick="agregar('*')">×</button>
+                                <button onclick="agregar('Math.sqrt(')">√</button>
+                                <button onclick="agregar('Math.cbrt(')">³√</button>
+                                <button onclick="agregar('4')">4</button>
+                                <button onclick="agregar('5')">5</button>
+                                <button onclick="agregar('6')">6</button>
+                                <button onclick="agregar('-')">-</button>
+                                <button onclick="agregar('Math.log10(')">log</button>
+                                <button onclick="agregar('Math.log(')">ln</button>
+                                <button onclick="agregar('1')">1</button>
+                                <button onclick="agregar('2')">2</button>
+                                <button onclick="agregar('3')">3</button>
+                                <button onclick="agregar('+')">+</button>
+                                <button onclick="agregar('Math.sin(')">sin</button>
+                                <button onclick="agregar('Math.cos(')">cos</button>
+                                <button onclick="agregar('Math.tan(')">tan</button>
+                                <button onclick="agregar('0')">0</button>
+                                <button onclick="agregar('.')">.</button>
+                                <button onclick="igual()">=</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab2-content" class="tab-content">
+                    <div class="contenedor">
+                        <div class="calculadora">
+                            <form id="ahorroForm">
+                                <label for="ahorroInicial">Ahorro inicial ($):</label>
+                                <input type="number" id="ahorroInicial" required>
+
+                                <label for="incremento">Incremento semanal ($):</label>
+                                <input type="number" id="incremento" required>
+
+                                <label for="semanas">Número de semanas:</label>
+                                <input type="number" id="semanas" required>
+
+                                <button type="submit">Calcular</button>
+                            </form>
+
+                            <h2 id="resultado">
+                                <p id="invisible">Total ahorrado en la semana 0: $0</p>
+                            </h2>
+                        </div>
+
+                        <div class="detalle" id="detalle" style="padding-right: 150px;">
+                            <h3 id="invisible">Proceso de Cálculo:</h3><br>
+                            <p id="invisible"><strong>Fórmula:</strong> aₙ = a₁ + (n - 1) * d</p><br>
+                            <p id="invisible"><strong>Reemplazando valores:</strong></p>
+                            <p id="invisible">aₙ = $0 + ($0 - 1) * $0</p>
+                            <p id="invisible">aₙ = $0 + ($0 - 1) * $0</p>
+                            <p id="invisible">aₙ = $0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab3-content" class="tab-content">
+                    <div class="contenedor">
+                        <!-- Calculadora de Interés Simple -->
+                        <div class="calculadora">
+                            <form id="interesSimpleForm">
+                                <label for="capitalSimple">Capital inicial ($):</label>
+                                <input type="number" id="capitalSimple" required>
+                
+                                <label for="tasaSimple">Tasa de interés anual (%):</label>
+                                <input type="number" id="tasaSimple" step="0.01" required>
+                
+                                <label for="tiempoSimple">Tiempo (años):</label>
+                                <input type="number" id="tiempoSimple" required>
+                
+                                <button type="submit">Calcular</button>
+                            </form>
+                        </div>
+                
+                        <!-- Detalle del proceso de cálculo -->
+                        <div class="detalle" id="detalleInteresSimple" style="padding-right: 100px;">
+                            <h3 id="procesoTituloSimple" class="invisible">Proceso de Cálculo:</h3><br>
+                            <p id="formulaTituloSimple" class="invisible"><strong>Fórmula:</strong></p>
+                            <p id="formulaSimple" class="invisible">$$I = C \cdot r \cdot t$$</p><br>
+                            <p id="reemplazoTituloSimple" class="invisible"><strong>Reemplazando valores:</strong></p>
+                            <p id="formulaReemplazadaSimple" class="invisible">$$I = 0 \cdot 0 \cdot 0$$</p>
+                            <p id="resultadoFormulaSimple" class="invisible">$$I = 0$$</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab4-content" class="tab-content">
+                    <div class="contenedor">
+                        <div class="detalle" id="detalleInteresCompuesto" style="padding-right: 100px;">
+                            <h3 id="procesoTitulo" class="invisible">Proceso de Cálculo:</h3><br>
+                            <p id="formulaTitulo" class="invisible"><strong>Fórmula:</strong></p>
+                            <p id="formula" class="invisible">$$S = C_0 \cdot \left(1 + \frac{r}{n}\right)^{n \cdot t}$$</p><br>
+                            <p id="reemplazoTitulo" class="invisible"><strong>Reemplazando valores:</strong></p>
+                            <p id="formulaReemplazada" class="invisible">$$S = 0 \cdot \left(1 + \frac{0}{0}\right)^{0 \cdot 0}$$</p>
+                            <p id="resultadoFormula" class="invisible">$$S = 0$$</p>
+                        </div>
+                
+                        <div class="calculadora">
+                            <form id="interesCompuestoForm">
+                                <label for="capital">Capital inicial ($):</label>
+                                <input type="number" id="capital" required>
+                
+                                <label for="tasa">Tasa de interés anual (%):</label>
+                                <input type="number" id="tasa" step="0.01" required>
+                
+                                <label for="periodos">Número de años:</label>
+                                <input type="number" id="periodos" required>
+                
+                                <label for="frecuencia">Frecuencia de capitalización:</label>
+                                <select id="frecuencia" required>
+                                    <option value="1">Anual</option>
+                                    <option value="2">Semestral</option>
+                                    <option value="4">Trimestral</option>
+                                    <option value="12">Mensual</option>
+                                    <option value="365">Diaria</option>
+                                </select>
+                
+                                <button type="submit">Calcular</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab5-content" class="tab-content">
+                </section>
+
+                <section id="tab6-content" class="tab-content">
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

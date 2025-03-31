@@ -1,0 +1,410 @@
+:root {
+    --primary: #6A65FE;
+    --bg: #0E1420;
+    --tabs-bg: #111926;
+    --border: #2E323E;
+    --text-color: #FFF;
+    --input-bg: #333;
+    --input-border: #444;
+    --button-bg: #4facfe;
+    --button-hover-bg: #00c6ff;
+    --container-bg: #1f1f1f;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+    background: var(--bg);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Vertical Tabs */
+.tabs-container {
+    width: 100%;
+    max-width: 80rem; /* Aumentado el ancho máximo para más espacio */
+    display: flex;
+    user-select: none;
+    overflow: hidden;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: var(--tabs-bg);
+    border: 1px solid var(--border);
+    container-type: inline-size;
+    container-name: tabs-container;
+}
+
+.tabs-layout {
+    display: flex;
+    flex-direction: row; /* Alineamos los elementos en fila */
+    gap: 1.5rem; /* Espacio entre la calculadora y el resultado */
+}
+
+.tab-content-wrapper {
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: 34rem;
+    width: 100%;
+    color: var(--text-color);
+    transition: all 0.45s ease-in-out;
+}
+
+.tab-content h2 {
+    display: none;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.tab-content {
+    margin-top: 0.25rem;
+    display: block;
+    font-size: 1rem;
+    max-width: 100%;
+    height: 34rem;
+    padding: 0 1rem;
+    transition: all 0.45s ease-in-out;
+}
+
+.tabs {
+    position: relative;
+    flex-direction: column;
+    list-style-type: none;
+    display: none;
+    min-width: 18rem;
+}
+
+.tabs-select {
+    display: block;
+    appearance: none;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    background: var(--tabs-bg);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    box-sizing: border-box;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@container tabs-container (min-width: 40rem) {
+    .tabs-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tabs {
+        display: flex;
+    }
+
+    .tab-content h2 {
+        display: block;
+    }
+
+    .tabs-select {
+        display: none;
+    }
+
+    .tabs-layout {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+        text-align: center;
+    }
+    .detalle {
+        text-align: left;
+    }
+}
+
+/* Vertical Tabs Estilo */
+.tabs ul {
+    gap: 1rem;
+}
+
+.tabs li {
+    padding: 0.25rem;
+}
+
+.tabs a {
+    position: relative;
+    display: flex;
+    text-decoration: none;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    overflow: hidden;
+    text-align: left;
+    justify-content: start;
+    height: 5rem;
+    padding: 0 1rem;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tabs a img {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.tabs .active,
+.tabs a:hover {
+    font-weight: 700;
+    outline: none;
+    background: var(--primary);
+    color: var(--text-color);
+    border-radius: 1rem;
+}
+
+.tabs a svg {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    stroke: var(--text-color);
+}
+
+/* Calculadora científica */
+
+.calculadora-cientifica {
+    width: 100%;
+
+    background: var(--container-bg);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.calculadora-cientifica h2 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+#pantalla {
+    width: 100%;
+    height: 55px;
+    font-size: 1.5rem;
+    text-align: right;
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.botones {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 8 columnas fijas */
+    grid-template-rows: repeat(5, auto); /* 4 filas automáticas */
+    gap: 10px; /* Espaciado entre botones */
+}
+
+.botones button {
+    padding: 15px;
+    font-size: 18px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.botones button:hover {
+    background: var(--button-hover-bg);
+}
+
+/* Calculadora de Ahorros */
+
+.contenedor {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 95%;
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.calculadora {
+    flex: 1;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    color: #ccc;
+}
+
+input {
+    padding: 10px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+button {
+    background: var(--button-bg);
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+}
+
+button:hover {
+    background: var(--button-hover-bg);
+}
+
+#invisible {
+    opacity: 0%;
+}
+
+.detalle {
+    flex: 1;
+    background: var(--container-bg);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Interés Simple */
+
+/* Ajustar el área de la calculadora (a la izquierda) */
+.calculadora {
+    order: 1; /* Asegura que la calculadora esté a la izquierda */
+    flex: 1;
+    text-align: center;
+}
+
+/* Ajustar el área de detalle (proceso de cálculo a la derecha) */
+.detalle {
+    order: 2; /* Asegura que el proceso de cálculo esté a la derecha */
+    flex: 1;
+    background: var(--tabs-bg);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+#invisible, .invisible {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.invisible.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Interés Compuesto */
+
+/* Estilo para el select (frecuencia de capitalización) */
+select {
+    padding: 10px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--input-bg);
+    transition: all 0.3s ease-in-out;
+    appearance: none; /* Oculta el estilo predeterminado del navegador */
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+select option {
+    background-color: var(--container-bg);
+    color: var(--text-color);
+}
+
+/* Ajustar el área de la calculadora (a la izquierda) */
+.calculadora {
+    order: 1; /* Asegura que la calculadora esté a la izquierda */
+    flex: 1;
+    text-align: center;
+}
+
+/* Ajustar el área de detalle (proceso de cálculo a la derecha) */
+.detalle {
+    order: 2; /* Asegura que el proceso de cálculo esté a la derecha */
+    flex: 1;
+    background: var(--container-bg);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+#invisible, .invisible {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.invisible.show {
+    opacity: 1;
+    visibility: visible;
+}
